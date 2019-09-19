@@ -23,18 +23,26 @@ public class TimeClient {
         //hint: 建立 Socket 物件，並且取得 input stream 儲存在 input 變數中
         Socket socket=null;
         InputStream input=null;
-        socket=new Socket("time.nist.gov", 13); //建立socket物件
-        input=socket.getInputStream(); //取得輸入串流
-        /////////////////////////////////////////////////////////////
-        //
-        //用StringBuilder接資料
-        StringBuilder builder=new StringBuilder();
-        InputStreamReader reader=new InputStreamReader(input);
-        for(int c=reader.read(); c!=-1; c=reader.read()){
-            builder.append((char)c);
+        try {
+            socket=new Socket("time.nist.gov", 13); //建立socket物件 //開啟socket
+            input=socket.getInputStream(); //取得輸入串流
+            /////////////////////////////////////////////////////////////
+
+            //用StringBuilder接資料
+            StringBuilder builder=new StringBuilder();
+            //InputStreamReader為了補字元用（可讀中文）
+            InputStreamReader reader=new InputStreamReader(input);
+            for(int c=reader.read(); c!=-1; c=reader.read()){
+                builder.append((char)c);
+            }
+            System.out.println(builder);
         }
-        System.out.println(builder);
-        socket.close();
+        catch(Exception e){
+            //處理錯誤
+        }
+        finally {
+            socket.close(); //關閉socket(有開就要關)
+        }
     }
     
 }
