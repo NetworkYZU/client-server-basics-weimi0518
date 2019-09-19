@@ -26,7 +26,7 @@ public class TimeClient {
         socket=new Socket("time.nist.gov", 13); //建立socket物件
         input=socket.getInputStream(); //取得輸入串流
         /////////////////////////////////////////////////////////////
-        
+        //
         //用StringBuilder接資料
         StringBuilder builder=new StringBuilder();
         InputStreamReader reader=new InputStreamReader(input);
